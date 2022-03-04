@@ -116,6 +116,7 @@ export default ()=>{
  
             if(rez =="success"){
                  setToggle(false);
+                 getProducts();
             }else{
                 alert(rez.message);
             }
@@ -129,9 +130,9 @@ export default ()=>{
 
         if(rez == "delete success"){
             setProdName("");
-            setProdCategory("");
             setProdPrice("");
             toggle = false;
+            getProducts();
         }else{
             alert(rez.message);
         }
@@ -143,7 +144,7 @@ export default ()=>{
 
     useEffect(()=>{
         getProducts();
-    }, [filter,products]);
+    }, [filter]);
 
     useEffect(()=>{
         check();
