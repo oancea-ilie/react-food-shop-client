@@ -3,6 +3,7 @@ import fructImg from  "../images/fruct.png";
 import legumeImg from "../images/legume.png";
 import carneImg from "../images/carne.png";
 import patiserieImg from "../images/patiserie.png";
+import svgProduct from "../images/product-svg.svg";
 
 import Api from "../Api";
 
@@ -21,20 +22,22 @@ export default ()=>{
     let api = new Api();
 
     let getProducts = async()=>{
-        let type = 'id';
+        try{
+            let type = 'id';
         
-        if(filter == 'Recent'){type = 'id';}
-
-        if(filter =='Price desc'){type = 'price';}
-
-        if(filter == 'Price asc'){type = 'price-asc';}
-
-        let rez = await api.orderBy(type);
-
-        if(rez != 0){
-            setProducts(rez);
-        }else{
-            setErr("PROBLEME DIN API");
+            if(filter == 'Recent'){type = 'id';}
+    
+            if(filter =='Price desc'){type = 'price';}
+    
+            if(filter == 'Price asc'){type = 'price-asc';}
+    
+            let rez = await api.orderBy(type);
+                
+           if(!rez.message) {
+                setProducts(rez);
+           }
+        }catch(e){
+            setErr(e);
         }
     }
 
@@ -108,7 +111,7 @@ export default ()=>{
         if(err.length == 0 ){
             let obj = {
                 name: prodName,
-                price : prodPrice,
+                price : parseInt(prodPrice),
                 category_id: parseInt(cat)
             };
             
@@ -132,6 +135,7 @@ export default ()=>{
             setProdName("");
             setProdPrice("");
             toggle = false;
+            setProducts([]);
             getProducts();
         }else{
             alert(rez.message);
@@ -163,7 +167,7 @@ export default ()=>{
                 </div>
                 <div className="container">
                     {
-                        products.map((e)=>{
+                        products.length!=0 ? products.map((e)=>{
                             return <div className="card" key={e.id}>
                                         <img src={imgHandle(e.fk_product_id.id)} alt="image"/>
                                         <div className="text">
@@ -174,8 +178,17 @@ export default ()=>{
                                         <a href="#" className="delete" onClick={()=>deleteProductHandle(e.id)}>Delete</a>
                                     </div>
                         })
+                        :''
                     }
                 </div>
+                {
+                    products.length ==0?<section className="no-products">
+                                            <div className="card">
+                                                <img src={svgProduct} alt=""/>
+                                                <h1>Searching...</h1>
+                                            </div>
+                                        </section>:''
+                }
             </main>
         {
             toggle?<section className="add-section">
@@ -202,7 +215,6 @@ export default ()=>{
                 </div>
             </section>:''
         }
-
         </>
     );
 }

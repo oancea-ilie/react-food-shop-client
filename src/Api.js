@@ -42,7 +42,7 @@ export default class Api{
             if(rez.status === 200){
                 return rez.json();
             }else{
-                return 0;
+                return rez;
             }
 
         }catch(e){

@@ -406,6 +406,9 @@
   header {
     background-color: #58b820;
     width: 100%;
+
+
+
   }
   header .container {
     border-bottom: 1px solid #e0e0e0;
@@ -514,7 +517,7 @@
     }
     header .container .nav-toggler a {
       font-weight: 300;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
     header .nav-collapse {
       display: none;
@@ -581,6 +584,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: space-between;
   }
   main .container .card img {
     border: 5px solid #e0e0e0;
@@ -718,7 +722,7 @@
   }
   .add-section .container .card .category{
     outline: none;
-    padding: 0.4rem;
+    padding: 0.3rem;
     width: 216px;
     border-radius: 5px;
     border: 1px solid #58b820;
@@ -735,7 +739,7 @@
     font-size: 1rem;
     font-weight: 500;
     color: white;
-    padding: 0.5rem;
+    padding: 0.7rem;
     transition: 0.4s all;
   }
   .add-section .container .add:hover {
@@ -756,5 +760,24 @@
   .h2-category span{
     color: #48971b;
   }
+
+  .no-products {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .no-products .card {
+    position: relative;
+    max-width: 500px;
+  }
+  .no-products .card h1 {
+    color: rgba(56, 56, 56, 0.863);
+    position: absolute;
+    top: 65%;
+    left: 25%;
+  }
+
+
   /*# sourceMappingURL=style.css.map */
   
